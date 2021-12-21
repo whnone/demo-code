@@ -1,0 +1,27 @@
+#! /usr/bin/env node
+
+const config = require('./config')
+const {program} = require('commander')
+
+program.name('hn-server')
+
+
+const usages = []
+Object.values(config).forEach(option => {
+    const {flags, description, default: defu, usage} = option
+    program.option(flags, description, defu)
+    usages.push(usage)
+})
+
+program.on('--help', function () {
+    console.log('\r\nExamples:')
+    usages.forEach(ug => console.log('  '+ug))
+})
+
+program.parse(process.argv)
+
+let userOptions = program.opts()
+
+let createServer = require('../src/server')
+
+createServer(userOptions)
