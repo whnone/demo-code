@@ -1,29 +1,26 @@
-const { src, dest, parallel } = require('gulp');
-const pug = require('gulp-jade');
-const less = require('gulp-scss');
-const minifyCSS = require('gulp-csso');
-// const concat = require('gulp-concat');
+/**
+ * src 读
+ * dest 写
+ * parallel 同步
+ * series 异步
+ * 
+ */
+const {src, dest, parallel, series} = require('gulp')
+const guleClear = require('gulp-clean')
 
-function html() {
-  return src('src/pages/*.jade')
-    .pipe(pug())
-    .pipe(dest('build/wxml'))
+
+function clearBev () {
+    return src('dist/**', {read: 'false'}).pipe(guleClear())
 }
 
-function css() {
-  return src('src/pages/*.scss')
-    .pipe(less())
-    .pipe(minifyCSS())
-    .pipe(dest('build/wxss'))
+function copyJsBev () {
+    return src('src/**/*.js', {base: 'src'}).pipe(dest('dist'))
 }
 
-function js() {
-  return src('src/pages/*.js', { sourcemaps: true })
-    .pipe(dest('build/js', { sourcemaps: true }))
+function copyHtmlBev () {
+    return src('src/**/*.wxml', {base: 'src'}).pipe(dest('dist'))
 }
 
-exports.js = js;
-exports.css = css;
-exports.html = html;
+const compile = series(clearBev, copyJsBev, copyHtmlBev)
 
-exports.default = parallel(html, css, js);
+exports.compile = compile

@@ -1,19 +1,17 @@
 {
-  "name": "gulp-test1",
+  "name": "gulp-test",
   "version": "1.0.0",
-  "description": "",
+  "description": "test project",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "neo",
   "license": "ISC",
   "devDependencies": {
     "gulp": "^4.0.2"
   },
   "dependencies": {
-    "gulp-csso": "^4.0.1",
-    "gulp-jade": "^1.1.0",
-    "gulp-scss": "^1.4.0"
+    "gulp-clean": "^0.4.0"
   }
 }
