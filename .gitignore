@@ -2,4 +2,6 @@
 /gulp/node_modules
 /http/node_modules
 /react2022/node_modules
+/gulp/node_modules
+/gulp/dist
 .DS_Store
